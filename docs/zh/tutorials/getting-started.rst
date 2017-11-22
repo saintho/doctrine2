@@ -34,6 +34,7 @@ Doctrine 2 是一个 `对象关系映射器 (ORM) <http://en.wikipedia.org/wiki/
 是什么是实体?
 ~~~~~~~~~~~~~~~~~~
 
+实体具有唯一标识或主键的对象，这些类不继承任何抽象的类或接口，一
 Entities are PHP Objects that can be identified over many requests
 by a unique identifier or primary key. These classes don't need to extend any
 abstract base class or interface. An entity class must not be final

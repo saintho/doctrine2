@@ -3,7 +3,7 @@
 
 Doctrine的文档由教程, 用例等从不同的角度讲解对象关系如何映射
 
-Doctrine的DBAL包和Common包也有属于它们的文档
+Doctrine的DBAL包和Common包也有它们各的文档
 
 入门
 ---------------
@@ -17,23 +17,23 @@ Doctrine的DBAL包和Common包也有属于它们的文档
 对象映射
 -------------------------------
 
-* **基础映射**:
-  :doc:`对象 <reference/basic-mapping>` |
-  :doc:`关联关系 <reference/association-mapping>` |
-  :doc:`继承 <reference/inheritance-mapping>`
+* **映射**:
+  :doc:`对象映射 <reference/basic-mapping>` |
+  :doc:`关联映射 <reference/association-mapping>` |
+  :doc:`继承映射 <reference/inheritance-mapping>`
 
 * **映射驱动**:
-  :doc:`文档注释驱动 <reference/annotations-reference>` |
+  :doc:`注释驱动 <reference/annotations-reference>` |
   :doc:`XML驱动 <reference/xml-mapping>` |
   :doc:`YAML驱动 <reference/yaml-mapping>` |
-  :doc:`PHP代码驱动 <reference/php-mapping>`
+  :doc:`PHP驱动 <reference/php-mapping>`
 
 对象用例
 --------------------
 
-* **基础用例**:
+* **对象用例**:
   :doc:`实体 <reference/working-with-objects>` |
-  :doc:`关联关系 <reference/working-with-associations>` |
+  :doc:`关联 <reference/working-with-associations>` |
   :doc:`事件 <reference/events>`
 
 * **查询用例**:
@@ -49,16 +49,16 @@ Doctrine的DBAL包和Common包也有属于它们的文档
 ---------------
 
 * :doc:`架构 <reference/architecture>`
-* :doc:`配置详解 <reference/advanced-configuration>`
-* :doc:`限制和缺陷 <reference/limitations-and-known-issues>`
+* :doc:`配置进阶 <reference/advanced-configuration>`
+* :doc:`限制和不足 <reference/limitations-and-known-issues>`
 * :doc:`命令行工具 <reference/tools>`
 * :doc:`事务和并发 <reference/transactions-and-concurrency>`
 * :doc:`过滤器 <reference/filters>`
-* :doc:`命名策略 <reference/namingstrategy>`
+* :doc:`命名规则 <reference/namingstrategy>`
 * :doc:`性能优化 <reference/improving-performance>`
 * :doc:`缓存 <reference/caching>`
-* :doc:`残缺对象 <reference/partial-objects>`
-* :doc:`对象监听策略 <reference/change-tracking-policies>`
+* :doc:`缺陷对象 <reference/partial-objects>`
+* :doc:`对象行为监听策略 <reference/change-tracking-policies>`
 * :doc:`最佳实践 <reference/best-practices>`
 * :doc:`元数据驱动器 <reference/metadata-drivers>`
 * :doc:`批处理 <reference/batch-processing>`
@@ -68,7 +68,7 @@ Doctrine的DBAL包和Common包也有属于它们的文档
 ---------
 
 * :doc:`索引关联 <tutorials/working-with-indexed-associations>`
-* :doc:`关联懒加载 <tutorials/extra-lazy-associations>`
+* :doc:`关联的超懒加载 <tutorials/extra-lazy-associations>`
 * :doc:`复合主键 <tutorials/composite-primary-keys>`
 * :doc:`关联排序 <tutorials/ordered-associations>`
 * :doc:`分页 <tutorials/pagination>`
