@@ -34,42 +34,29 @@ Doctrine 2 是一个 `对象关系映射器 (ORM) <http://en.wikipedia.org/wiki/
 是什么是实体?
 ~~~~~~~~~~~~~~~~~~
 
-实体具有唯一标识或主键的对象，这些类不继承任何抽象的类或接口，一
-Entities are PHP Objects that can be identified over many requests
-by a unique identifier or primary key. These classes don't need to extend any
-abstract base class or interface. An entity class must not be final
-or contain final methods. Additionally it must not implement
-**clone** nor **wakeup**, unless it :doc:`does so safely <../cookbook/implementing-wakeup-or-clone>`.
+实体是具有唯一标识或主键的对象，这些类不继承任何抽象的类或接口，实体也不能是不能继承的类或包含不能继承的方法。另外也不能实现**clone** 或 **wakeup** 方法, 除非能保证 :doc:`它是安全的 <../cookbook/implementing-wakeup-or-clone>`.
 
-An entity contains persistable properties. A persistable property
-is an instance variable of the entity that is saved into and retrieved from the database
-by Doctrine's data mapping capabilities.
+实体包含持久化的属性，这些实例属性是通过doctrine的数据映射规则保存到数据库之后再检索出来的。
 
-An Example Model: Bug Tracker
+事例模型: Bug 跟踪器
 -----------------------------
 
-For this Getting Started Guide for Doctrine we will implement the
-Bug Tracker domain model from the
-`Zend\_Db\_Table <http://framework.zend.com/manual/1.12/en/zend.db.adapter.html>`_
-documentation. Reading their documentation we can extract the
-requirements:
+这篇入门的doctrine教程是实现了`Zend\_Db\_Table <http://framework.zend.com/manual/1.12/en/zend.db.adapter.html>`_ 的领域模型文档. 通过阅读他的文档我们能提取出以下的需求:
 
--  A Bug has a description, creation date, status, reporter and
-   engineer
--  A Bug can occur on different Products (platforms)
--  A Product has a name.
--  Bug reporters and engineers are both Users of the system.
--  A User can create new Bugs.
--  The assigned engineer can close a Bug.
--  A User can see all his reported or assigned Bugs.
--  Bugs can be paginated through a list-view.
+-  一个bug包含如下属性，描述，创建时间，状态，报告人，开发人
+-  一个bug能发生在不同产品 (平台) 上
+-  一个产品有一个名字属性.
+-  bug的报告人和引擎字段都是系统来控制.
+-  用户能创建 Bugs.
+-  指派的开发人能关闭bug.
+-  用户能查看全部报告和分配的bug.
+-  bug列表能进行分页.
 
-Project Setup
+项目安装
 -------------
 
-Create a new empty folder for this tutorial project, for example
-``doctrine2-tutorial`` and create a new file ``composer.json`` with
-the following contents:
+先为这个项目创建一个空的文件夹并命名为
+``doctrine2-tutorial`` 并创建一个新的文件放到目录下 ``composer.json`` 包含以下内容:
 
 ::
 
