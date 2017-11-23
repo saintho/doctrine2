@@ -25,7 +25,7 @@
     有些代码特性在旧版本的doctrine中并不支持.
 
 什么是doctrine?
------------------
+--------------
 
 Doctrine 2 是一个 `对象关系映射器 (ORM) <http://en.wikipedia.org/wiki/Object-relational_mapping>`_ 支持 PHP 5.4+,
 它隐藏了PHP对象持久化的复杂性. 使用数据映射模式, 为了能够完成分离你的业务逻辑代码与持久到关系数据库系统的复杂问题, 当然这
@@ -39,7 +39,7 @@ Doctrine 2 是一个 `对象关系映射器 (ORM) <http://en.wikipedia.org/wiki/
 实体包含持久化的属性，这些实例属性是通过doctrine的数据映射规则保存到数据库之后再检索出来的。
 
 事例模型: Bug 跟踪器
------------------------------
+------------------
 
 这篇入门的doctrine教程是实现了`Zend\_Db\_Table <http://framework.zend.com/manual/1.12/en/zend.db.adapter.html>`_ 的领域模型文档. 通过阅读他的文档我们能提取出以下的需求:
 
@@ -53,7 +53,7 @@ Doctrine 2 是一个 `对象关系映射器 (ORM) <http://en.wikipedia.org/wiki/
 -  bug列表能进行分页.
 
 项目安装
--------------
+-------
 
 先为这个项目创建一个空的文件夹并命名为
 ``doctrine2-tutorial`` 并创建一个新的文件放到目录下 ``composer.json`` 包含以下内容:
@@ -71,17 +71,16 @@ Doctrine 2 是一个 `对象关系映射器 (ORM) <http://en.wikipedia.org/wiki/
     }
 
 
-Install Doctrine using the Composer Dependency Management tool, by calling:
+安装doctrine是使用composer的依赖包管理工具, 执行下面命令:
 
 ::
 
     $ composer install
 
-This will install the packages Doctrine Common, Doctrine DBAL, Doctrine ORM,
-Symfony YAML and Symfony Console into the `vendor` directory. The Symfony 
-dependencies are not required by Doctrine but will be used in this tutorial.
+这将会安装 Doctrine Common, Doctrine DBAL, Doctrine ORM,Symfony YAML 和 Symfony Console 几个包到 `vendor` 目录下, symfony的
+依赖并不是必须的对于doctrine, 但是在这个教程中我们将使用到它们.
 
-Add the following directories:
+接着增加以下的目录:
 ::
 
     doctrine2-tutorial
@@ -90,15 +89,11 @@ Add the following directories:
     |   `-- yaml
     `-- src
 
-Obtaining the EntityManager
----------------------------
+获取实体管理器
+------------
 
-Doctrine's public interface is through the ``EntityManager``. This class
-provides access points to the complete lifecycle management for your entities,
-and transforms entities from and back to persistence. You have to
-configure and create it to use your entities with Doctrine 2. I
-will show the configuration steps and then discuss them step by
-step:
+doctrine接口都是来自 ``EntityManager``. 实体管理器提供了管理实体的完整生命周期和实体到持久化之间的转换, 接下来我将通过下面的代码一
+部分一部分的跟你讨论doctrine的配置:
 
 .. code-block:: php
 
@@ -109,41 +104,34 @@ step:
     
     require_once "vendor/autoload.php";
     
-    // Create a simple "default" Doctrine ORM configuration for Annotations
+    // 创建一个基于默认的注释驱动的配置
     $isDevMode = true;
     $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode);
-    // or if you prefer yaml or XML
+    // 当然你愿意的话, 也是可以选择使用 yaml 或者 XML 的驱动
     //$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config/xml"), $isDevMode);
     //$config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/config/yaml"), $isDevMode);
     
-    // database configuration parameters
+    // 数据库的配置参数
     $conn = array(
         'driver' => 'pdo_sqlite',
         'path' => __DIR__ . '/db.sqlite',
     );
     
-    // obtaining the entity manager
+    // 获取实体管理器
     $entityManager = EntityManager::create($conn, $config);
 
-The require_once statement sets up the class autoloading for Doctrine and
-its dependencies using Composer's autoloader.
+一开始 require_once 的加载语法建立doctrine的自动加载, 当然这是基于composer的自动加载机制了.
 
-The second block consists of the instantiation of the ORM
-``Configuration`` object using the Setup helper. It assumes a bunch
-of defaults that you don't have to bother about for now. You can
-read up on the configuration details in the
-:doc:`reference chapter on configuration <../reference/configuration>`.
+第二部分包含的安装帮助的实例配置 ``Configuration`` 对象, 配置对象已经包含大量的默认配置, 在刚开始学习的时候或许你不用过分关注他,
+你也可以阅读 :doc:`进阶配置 <../reference/configuration>` 来了解详细的配置
 
-The third block shows the configuration options required to connect to
-a database. In this case, we'll use a file-based SQLite database. All the
-configuration options for all the shipped drivers are given in the
-`DBAL Configuration section of the manual <http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/>`_.
+第三部分展示了连接数据库中的必要配置. 在这个项目例子中, 我们使用了基于文件的SQLite数据库, 全部驱动的可选配置你可以通过doctrine-dbal的
+配置章节来了解细节 `DBAL 的配置手册 <http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/>`_.
 
-The last block shows how the ``EntityManager`` is obtained from a
-factory method.
+最后一部分的代码展示了, 如何从一个工厂方法中获取实体管理器
 
-Generating the Database Schema
-------------------------------
+生成数据库架构
+------------
 
 Doctrine has a command-line interface that allows you to access the SchemaTool,
 a component that can generate a relational database schema based entirely on the
@@ -188,8 +176,8 @@ The updating of databases uses a Diff Algorithm for a given
 Database Schema. This is a cornerstone of the ``Doctrine\DBAL`` package,
 which can even be used without the Doctrine ORM package.
 
-Starting with the Product Entity
---------------------------------
+首先增加 product 实体
+-------------------
 
 We start with the simplest entity, the Product. Create a ``src/Product.php`` file to contain the ``Product``
 entity definition:
@@ -423,8 +411,8 @@ request is sufficient to update the database for all of the modified entities.
 After calling this script on one of the existing products, you can verify the
 product name changed by calling the ``show_product.php`` script.
 
-Adding Bug and User Entities
-----------------------------
+接着增加 Bug 和 User 实体
+-----------------------
 
 We continue with the bug tracker example by creating the ``Bug`` and ``User``
 classes. We'll store them in ``src/Bug.php`` and ``src/User.php``, respectively.
@@ -758,7 +746,7 @@ Lets add metadata mappings for the ``Bug`` entity, as we did for
 the ``Product`` before:
 
 .. configuration-block::
-    .. code-block:: php
+.. code-block:: php
 
         <?php
         // src/Bug.php
@@ -973,10 +961,10 @@ Update your database schema by running:
     $ vendor/bin/doctrine orm:schema-tool:update --force
 
 
-Implementing more Requirements
-------------------------------
+实现接下来的需求
+--------------
 
-So far, we've seen the most basic features of the metadata definition language.
+到目前为止, we've seen the most basic features of the metadata definition language.
 To explore additional functionality, let's first create new ``User`` entities:
 
 .. code-block:: php
@@ -1176,8 +1164,8 @@ a bug. The resulting SQL query for this single select statement is
 pretty large, however still more efficient to retrieve compared to
 hydrating objects.
 
-Find by Primary Key
-~~~~~~~~~~~~~~~~~~~
+通过主键查找
+~~~~~~~~~~~
 
 The next Use-Case is displaying a Bug by primary key. This could be
 done using DQL as in the previous example with a where clause,
@@ -1282,8 +1270,8 @@ and usage of bound parameters:
         echo $bug->getId() . " - " . $bug->getDescription()."\n";
     }
 
-Number of Bugs
---------------
+Bugs的数量
+---------
 
 Until now we only retrieved entities or their array representation.
 Doctrine also supports the retrieval of non-entities through DQL.
@@ -1307,8 +1295,8 @@ grouped by product:
         echo $productBug['name']." has " . $productBug['openBugs'] . " open bugs!\n";
     }
 
-Updating Entities
------------------
+更新实体
+-------
 
 There is a single use-case missing from the requirements, Engineers
 should be able to close a bug. This looks like:
@@ -1354,8 +1342,8 @@ entity is scheduled for an UPDATE against the database. Only the
 changed columns are updated, which offers a pretty good performance
 improvement compared to updating all the properties.
 
-Entity Repositories
--------------------
+实体仓库
+-------
 
 For now we have not discussed how to separate the Doctrine query logic from your model.
 In Doctrine 1 there was the concept of ``Doctrine_Table`` instances for this
@@ -1508,15 +1496,13 @@ deal with it:
     $productCount = $entityManager->getRepository(Product::class)
                              ->count(['name' => $productName]);
 
-Conclusion
-----------
+总结
+----
 
-This tutorial is over here, I hope you had fun. Additional content
-will be added to this tutorial incrementally, topics will include:
+说到这儿, 这个案列就完结了, 希望你从中获益良多. 其他更多的内容将会逐步添加到本教程当中, 计划将会包含以下的主题:
 
--   More on Association Mappings
--   Lifecycle Events triggered in the UnitOfWork
--   Ordering of Collections
+-   关联映射
+-   在工作单元中触发生命周期事件
+-   集合的排序
 
-Additional details on all the topics discussed here can be found in
-the respective manual chapters.
+关于本案列说描述的主题的更多内容可以在对应的手册中了解.
