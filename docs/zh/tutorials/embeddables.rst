@@ -1,4 +1,5 @@
 Separating Concerns using Embeddables
+使用嵌入值
 -------------------------------------
 
 Embeddables are classes which are not entities themselves, but are embedded

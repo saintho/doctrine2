@@ -133,10 +133,8 @@ doctrine接口都是来自 ``EntityManager``. 实体管理器提供了管理实�
 生成数据库架构
 ------------
 
-Doctrine has a command-line interface that allows you to access the SchemaTool,
-a component that can generate a relational database schema based entirely on the
-defined entity classes and their metadata. For this tool to work, a
-cli-config.php file must exist in the project root directory:
+Doctrine有一个命令行接口，让你可以使用schematool，schematool可以基于你定义的实体以及元数据的关联关系生成数据库架构. 但是使用这个工具之前需要在项目的根目录定义cli的配置, 配置文件名称
+cli-config.php. 内容如下:
 
 .. code-block:: php
 
@@ -146,16 +144,14 @@ cli-config.php file must exist in the project root directory:
     
     return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
 
-Change into your project directory and call the Doctrine command-line tool:
+进入你的项目目录并执行doctrine的命令行工具：
 
 ::
 
     $ cd project/
     $ vendor/bin/doctrine orm:schema-tool:create
 
-Since we haven't added any entity metadata in `src` yet, you'll see a message
-stating "No Metadata Classes to process." In the next section, we'll create a
-Product entity along with the corresponding metadata, and run this command again.
+因为我们还没有增加实体的元数据配置到 `src` 上，  你将会看到下面的消息提示 "No Metadata Classes to process." 在下面我将建一个product实体并配置它的元数据映射, 之后再跑一次这个命令.
 
 Note that as you modify your entities' metadata during the development process,
 you'll need to update your database schema to stay in sync with the metadata.
